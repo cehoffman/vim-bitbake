@@ -104,7 +104,8 @@ endfunction
 
 function! s:runtime_globpath(file)
   let sep = !exists("+shellslash") || &shellslash ? '/' : '\'
-  return split(globpath(join(split($BBLAYERS, ' '), sep.'recipes*,'), a:file), "\n")
+  let sep .= 'recipes*'
+  return split(globpath(join(split($BBLAYERS, ' '), sep.',').sep, a:file), "\n")
 endfunction
 
 function! s:find(count,cmd,file,lcd)
